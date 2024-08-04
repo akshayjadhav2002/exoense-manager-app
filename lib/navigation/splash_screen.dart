@@ -1,7 +1,7 @@
-import "dart:async";
-import "package:expensemanager/authentication/signup_screen.dart";
+import "package:expensemanager/providers/auth_provider.dart";
 import "package:expensemanager/utils/constant.dart";
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
 
 class SplashScreen extends StatefulWidget {
 
@@ -15,16 +15,10 @@ class _SplashState extends State{
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
-    Timer(
-        const Duration(milliseconds: 2500),
-        () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const SignupScreen()),
-            ));
+    Provider.of<AuthProvider>(context, listen: false).tryAutoLogin(context);
   }
+
    @override
   Widget build(BuildContext context){
     return Scaffold(

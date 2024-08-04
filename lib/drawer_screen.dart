@@ -1,9 +1,11 @@
 import "package:expensemanager/aboutUs/about_Us.dart";
 import "package:expensemanager/categories/category_screen.dart";
+import "package:expensemanager/providers/auth_provider.dart";
 import "package:expensemanager/summaryGraph/graph_screen.dart";
 import "package:expensemanager/Transactions/home_screen.dart";
 import "package:expensemanager/trash/trash_screen.dart";
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
 
 // class MyDrawer extends StatefulWidget {
 //   const MyDrawer({super.key});
@@ -646,16 +648,7 @@ Widget MYDrawer (BuildContext context){
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
-              if (!aboutusFlag) {
-                aboutusFlag = true;
-                transactionFlag = false;
-                graphFlag = false;
-                categoryFlag = false;
-                trashFlag = false;
-              }
-              Navigator.push(context, MaterialPageRoute(builder:(context) {
-                return const AboutUs();
-              },));
+              Provider.of<AuthProvider>(context,listen: false).signOut(context);
             },
             child: Container(
               alignment: Alignment.centerLeft,
@@ -675,13 +668,13 @@ Widget MYDrawer (BuildContext context){
                     width: 10,
                   ),
                   const Icon(
-                    Icons.person,
+                    Icons.logout_rounded,
                     color: Color.fromRGBO(4, 161, 125, 1),
                   ),
                   Container(
                     margin: const EdgeInsets.all(10),
                     child: const Text(
-                      "About Us",
+                      "Log Out",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -693,6 +686,7 @@ Widget MYDrawer (BuildContext context){
               ),
             ),
           ),
+          
         ],
       ),
     );

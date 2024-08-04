@@ -40,12 +40,12 @@ class _HomeScreenState extends State{
 
   List transactionList = [];
 
-  void submit(){
-    transactionList.add(
-      Transaction(title: categoryController.text, amount:amountController.text, description: desccriptionController.text
-      )
-    );
-  }
+  // void submit(){
+  //   transactionList.add(
+  //    // Transaction(title: categoryController.text, amount:amountController.text, description: desccriptionController.text
+  //     )
+  //   );
+  // }
 
   //add transaction bottom sheet 
   void bottomSheet (){

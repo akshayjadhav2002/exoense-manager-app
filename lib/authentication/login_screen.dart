@@ -1,9 +1,9 @@
 import 'package:expensemanager/authentication/widgets/custom_authentication_button.dart';
 import 'package:expensemanager/authentication/widgets/texteditor.dart';
-import 'package:expensemanager/Transactions/home_screen.dart';
-import 'package:expensemanager/navigation/app_navigation.dart';
+import 'package:expensemanager/providers/auth_provider.dart';
 import 'package:expensemanager/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,8 +16,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
+
+   var authprovider = Provider.of<AuthProvider>(context);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: SingleChildScrollView(
@@ -67,13 +71,11 @@ class _LoginScreenState extends State {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AppNavigation())
-                        );
+                  //if(passwordController.text.toString().isNotEmpty && usernameController.text.toString().isNotEmpty){
+                  authprovider.signIn(context, usernameController.text.toString().trim(),passwordController.text.toString().trim());
+                  //}
                 },
-                child: customAuthButtton("Sign In"),
+                child: (authprovider.loading)?const CircularProgressIndicator(color:Color.fromRGBO(14, 161, 125, 1),):customAuthButtton("Sign In"),
               ),
               const Spacer(),
               Row(
