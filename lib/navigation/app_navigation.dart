@@ -3,9 +3,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:expensemanager/Transactions/home_screen.dart';
 import 'package:expensemanager/aboutUs/about_Us.dart';
 import 'package:expensemanager/categories/category_screen.dart';
+import 'package:expensemanager/providers/categories_provider.dart';
 import 'package:expensemanager/summaryGraph/graph_screen.dart';
 import 'package:expensemanager/trash/trash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppNavigation extends StatefulWidget{
   const AppNavigation({super.key});
@@ -68,6 +70,7 @@ class _AppNavigationState extends State{
     ],
     onTap: (value) {
       log("$value");
+      Provider.of<CategoriesProvider>(context,listen: false).getCategories();
         setState(() {
           _pageNo = value;
         });

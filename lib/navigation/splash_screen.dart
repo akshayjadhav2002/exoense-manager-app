@@ -1,3 +1,7 @@
+import "dart:async";
+
+import "package:expensemanager/authentication/login_screen.dart";
+import "package:expensemanager/authentication/signup_screen.dart";
 import "package:expensemanager/providers/auth_provider.dart";
 import "package:expensemanager/utils/constant.dart";
 import "package:flutter/material.dart";
@@ -17,6 +21,9 @@ class _SplashState extends State{
   void initState() {
     super.initState();
     Provider.of<AuthProvider>(context, listen: false).tryAutoLogin(context);
+    Timer(const Duration(milliseconds: 1000), () {
+       Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) =>const LoginScreen(),));
+     });
   }
 
    @override

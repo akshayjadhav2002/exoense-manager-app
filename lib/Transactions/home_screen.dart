@@ -1,7 +1,6 @@
 import "package:expensemanager/Transactions/widgets/transaction_card.dart";
 import "package:expensemanager/Transactions/widgets/transaction_bottom_sheet.dart";
 import "package:expensemanager/drawer_screen.dart";
-import "package:expensemanager/Transactions/transaction.dart";
 import "package:flutter/material.dart";
 
 class HomeScreen extends StatefulWidget {

@@ -1,8 +1,9 @@
-
-
+import 'package:expensemanager/providers/categories_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-Widget addCategory (BuildContext context){
+Widget addCategory (BuildContext context,TextEditingController imageUrlController,TextEditingController categoriesController){
+  var categoriesProvider = Provider.of<CategoriesProvider>(context);
   return Padding(
             padding: EdgeInsets.only(
               top: 20,
@@ -43,7 +44,7 @@ Widget addCategory (BuildContext context){
                     ],
                   ),
                   TextFormField(
-                    
+                    controller: imageUrlController,
                     decoration: InputDecoration(
                       hintText: "Enter URL", 
                       border: OutlineInputBorder( 
@@ -66,7 +67,7 @@ Widget addCategory (BuildContext context){
                     ],
                   ),
                   TextFormField(
-                    
+                    controller: categoriesController,
                     decoration: InputDecoration(
                       hintText: "Enter Category",
                       border: OutlineInputBorder( 
@@ -80,13 +81,13 @@ Widget addCategory (BuildContext context){
                   //Add button
                   ElevatedButton(
                       onPressed: () {
-                        
+                        categoriesProvider.addCategory(imageUrlController.text.toString(), categoriesController.text.toString());
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromRGBO(14, 161, 125, 1),
                           fixedSize: const Size(150,50)),
-                      child: const Text(
+                      child: (categoriesProvider.loading)?const CircularProgressIndicator(color: Colors.grey,):const Text(
                         "Add",
                         style: TextStyle(
                             fontSize: 22,

@@ -14,11 +14,19 @@ class AuthProvider extends ChangeNotifier{
   late String _userName;
   String? _jwtToken ;
   DateTime? _expiryDate;
-
-  bool get isAuthenticated => _jwtToken != null && !JwtDecoder.isExpired(_jwtToken!);
+  bool get isAuthenticated {
+    cheackToken();
+    return _jwtToken != null && !JwtDecoder.isExpired(_jwtToken!);
+  }
   bool get loading =>_isLoading;
   String? get token =>_jwtToken;
   String? get userName => _userName;
+
+  void cheackToken()async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _jwtToken = pref.getString("token");
+    //notifyListeners();
+  } 
 
   void setLoading(bool value){
     _isLoading = value;

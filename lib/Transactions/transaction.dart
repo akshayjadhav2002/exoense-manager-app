@@ -17,7 +17,8 @@ class Transaction {
       this.date,
       this.description,
       this.id,
-      this.isDeleted});
+      this.isDeleted}
+      );
 
   Transaction.fromJson(Map<String, dynamic> json) {
     amount = json['amount'];
